@@ -4689,7 +4689,7 @@ function cdoseAll(){
     <p class="foot">Cualquier cambio en la pauta, coméntalo antes con tu médica. Puedes editarla en Salud → Medicación.</p>`,'--sky');
 }
 /* nombre discreto para su medicación (que nadie que vea la pantalla sepa cuál es) */
-const MED_ALIAS='Mi toma',MED_H=[3386935778],fnv=s=>{let x=0x811c9dc5;for(const c of s){x^=c.charCodeAt(0);x=Math.imul(x,0x01000193)>>>0;}return x;};
+const MED_ALIAS='Mi toma',MED_H=[3282915577],fnv=s=>{let x=0x811c9dc5;for(const c of s){x^=c.charCodeAt(0);x=Math.imul(x,0x01000193)>>>0;}return x;};
 const isMyMed=m=>!!m&&([String(m.name||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim()].map(fnv).some(v=>MED_H.includes(v))||!!m.cyc);
 function medAlias(){let ch=false;for(const m of S.health.meds||[])if([String(m.name||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim()].map(fnv).some(v=>MED_H.includes(v))){m.name=MED_ALIAS;ch=true;}if(ch&&!isDemo)setTimeout(()=>commit('health'),0);}
 /* activar la pauta de su médica con un solo toque */
