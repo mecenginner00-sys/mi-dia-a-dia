@@ -4654,7 +4654,7 @@ function cpDay(d){
 
 /* ---------- Medicación con dosis según el ciclo (pauta indicada por la médica) ---------- */
 /* pauta que le indicó su médica: 5 mg los 6 días antes de la regla y el día 1; 4,5 los días 2-3; 4 los días 4-5; 3,5 los días 6-7; 3 el resto */
-const CDOSE_DEF={pre:6,preDose:5,base:3,unit:'mg',steps:[{a:1,b:1,mg:5},{a:2,b:3,mg:4.5},{a:4,b:5,mg:4},{a:6,b:7,mg:3.5}]};
+const CDOSE_DEF={pre:6,preDose:5,base:3,unit:'ml',steps:[{a:1,b:2,mg:5},{a:3,b:4,mg:4.5},{a:5,b:6,mg:4}]};
 const numES=v=>String(Math.round(+v*100)/100).replace('.',',');
 const numIn=v=>{const x=parseFloat(String(v||'').replace(',','.'));return isFinite(x)?x:NaN;};
 function parseSteps(txt){const out=[];for(const l of String(txt||'').split(/\n|;|·/)){const m=l.match(/(\d+)\s*(?:[-–a]\s*(\d+))?\s*[:=]\s*(\d+(?:[.,]\d+)?)/);if(m)out.push({a:+m[1],b:+(m[2]||m[1]),mg:numIn(m[3])});}return out.sort((x,y)=>x.a-y.a);}
@@ -4689,7 +4689,7 @@ function cdoseAll(){
     <p class="foot">Cualquier cambio en la pauta, coméntalo antes con tu médica. Puedes editarla en Salud → Medicación.</p>`,'--sky');
 }
 /* nombre discreto para su medicación (que nadie que vea la pantalla sepa cuál es) */
-const MED_ALIAS='Mi toma',MED_H=[3282915577],fnv=s=>{let x=0x811c9dc5;for(const c of s){x^=c.charCodeAt(0);x=Math.imul(x,0x01000193)>>>0;}return x;};
+const MED_ALIAS='Melissa',MED_H=[3282915577],fnv=s=>{let x=0x811c9dc5;for(const c of s){x^=c.charCodeAt(0);x=Math.imul(x,0x01000193)>>>0;}return x;};
 const isMyMed=m=>!!m&&([String(m.name||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim()].map(fnv).some(v=>MED_H.includes(v))||!!m.cyc);
 function medAlias(){let ch=false;for(const m of S.health.meds||[])if([String(m.name||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim()].map(fnv).some(v=>MED_H.includes(v))){m.name=MED_ALIAS;ch=true;}if(ch&&!isDemo)setTimeout(()=>commit('health'),0);}
 /* activar la pauta de su médica con un solo toque */
